@@ -243,17 +243,17 @@ final class DetailViewController: UIViewController {
             make.height.equalTo(80)
         }
         planetCardView.snp.makeConstraints { make in
+            make.width.height.equalTo(64)
             make.top.equalTo(originCardView.snp.top).offset(8)
             make.leading.equalTo(originCardView.snp.leading).offset(8)
-            make.trailing.equalTo(originCardView.snp.trailing).offset(-255)
             make.bottom.equalTo(originCardView.snp.bottom).offset(-8)
         }
         planetImageView.snp.makeConstraints { make in
-            make.top.equalTo(planetCardView.snp.top).offset(20)
-            make.leading.equalTo(planetCardView.snp.leading).offset(20)
-            make.trailing.equalTo(planetCardView.snp.trailing).offset(-20)
-            make.bottom.equalTo(planetCardView.snp.bottom).offset(-20)
+            make.width.height.equalTo(24)
+            make.centerX.equalTo(planetCardView.snp.centerX)
+            make.centerY.equalTo(planetCardView.snp.centerY)
         }
+
         originLabel.snp.makeConstraints { make in
             make.top.equalTo(originCardView.snp.top).offset(16)
             make.leading.equalTo(planetCardView.snp.trailing).offset(16)
