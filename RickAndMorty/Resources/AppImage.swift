@@ -37,6 +37,7 @@ enum AppImage: String, AppImageProtocol {
     case rickandmorty
     case logolaunchscreen
     case framelaunchscreen
+    case splashscreen
 
     
     // MARK: - MainScreen
