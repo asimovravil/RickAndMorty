@@ -33,4 +33,5 @@ enum AppColor: String, AppColorProtocol {
     case primaryBG
     case whiteBG
     case blackElementBG
+    case grayTextBG
 }

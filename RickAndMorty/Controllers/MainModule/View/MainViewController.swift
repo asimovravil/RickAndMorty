@@ -56,7 +56,10 @@ final class MainViewController: UIViewController {
             make.leading.equalToSuperview().offset(24)
         }
         mainCollectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(chatacterTitleLabel.snp.bottom).offset(10)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
     

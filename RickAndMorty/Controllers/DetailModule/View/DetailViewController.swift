@@ -12,6 +12,18 @@ final class DetailViewController: UIViewController {
     
     // MARK: - UI
     
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.register(EpisodesTableViewCell.self, forCellReuseIdentifier: EpisodesTableViewCell.reuseID)
+        tableView.backgroundColor = AppColor.blackBG.uiColor
+        tableView.rowHeight = 102
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
+        return tableView
+    }()
+    
     private lazy var characterDetailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = AppImage.rick.uiImage
@@ -146,6 +158,14 @@ final class DetailViewController: UIViewController {
         return label
     }()
     
+    private lazy var episodesTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Episodes"
+        label.textColor = AppColor.whiteBG.uiColor
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -156,7 +176,7 @@ final class DetailViewController: UIViewController {
     // MARK: - setupViews
     
     private func setupViews() {
-        [characterDetailImageView, characterDetailLabel, characterDetailSubtitleLabel, infoTitleLabel, infoCardView, infoSpeciesLabel, infoTypeLabel, infoGenderLabel, descriptionSpeciesLabel, descriptionTypeLabel, descriptionGenderLabel, originTitleLabel, originCardView, planetCardView, planetImageView, originLabel, originSubtitleLabel].forEach {
+        [characterDetailImageView, characterDetailLabel, characterDetailSubtitleLabel, infoTitleLabel, infoCardView, infoSpeciesLabel, infoTypeLabel, infoGenderLabel, descriptionSpeciesLabel, descriptionTypeLabel, descriptionGenderLabel, originTitleLabel, originCardView, planetCardView, planetImageView, originLabel, originSubtitleLabel, episodesTitleLabel, tableView].forEach {
             view.addSubview($0)
         }
         view.backgroundColor = AppColor.blackBG.uiColor
@@ -242,5 +262,33 @@ final class DetailViewController: UIViewController {
             make.top.equalTo(originCardView.snp.top).offset(46)
             make.leading.equalTo(planetCardView.snp.trailing).offset(16)
         }
+        episodesTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(originCardView.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(24)
+        }
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(episodesTitleLabel.snp.bottom).offset(16)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-16)
+        }
+    }
+}
+
+extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: EpisodesTableViewCell.reuseID,
+            for: indexPath
+        ) as? EpisodesTableViewCell else {
+            fatalError("Could not cast to LocalizationViewCell")
+        }
+        cell.selectionStyle = .none
+        cell.backgroundColor = AppColor.blackBG.uiColor
+        return cell
     }
 }
