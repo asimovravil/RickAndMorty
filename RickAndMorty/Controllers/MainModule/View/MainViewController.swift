@@ -44,6 +44,7 @@ final class MainViewController: UIViewController {
     private func setupViews() {
         view.addSubview(chatacterTitleLabel)
         view.addSubview(mainCollectionView)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         view.backgroundColor = AppColor.blackBG.uiColor
     }
     

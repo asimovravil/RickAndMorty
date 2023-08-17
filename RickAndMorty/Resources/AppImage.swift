@@ -47,4 +47,8 @@ enum AppImage: String, AppImageProtocol {
     case summer
     case beth
     
+    // MARK: - DetailScreen
+    
+    case planet
+    
 }
