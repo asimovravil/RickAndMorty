@@ -97,7 +97,7 @@ final class MainViewController: UIViewController {
         )
         // Section
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 32
+        section.interGroupSpacing = 40
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 0,
             leading: 16,
