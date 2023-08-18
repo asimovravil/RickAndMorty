@@ -14,9 +14,10 @@ final class DetailViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
+        let screenHeight = UIScreen.main.bounds.height
+        tableView.rowHeight = screenHeight
         tableView.register(EpisodesTableViewCell.self, forCellReuseIdentifier: EpisodesTableViewCell.reuseID)
         tableView.backgroundColor = AppColor.blackBG.uiColor
-        tableView.rowHeight = 102
         tableView.dataSource = self
         tableView.delegate = self
         tableView.showsVerticalScrollIndicator = false
