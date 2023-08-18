@@ -10,6 +10,7 @@ import SnapKit
 
 final class MainViewController: UIViewController {
 
+    private var characters: [Character] = []
     let sections: [SectionType] = [.main]
     
     // MARK: - UI
@@ -37,6 +38,7 @@ final class MainViewController: UIViewController {
 
         setupViews()
         setupConstraints()
+        fetchCharacterData()
     }
 
     // MARK: - setupViews
@@ -74,6 +76,24 @@ final class MainViewController: UIViewController {
             }
         }
     }
+    
+    private func fetchCharacterData() {
+        CharacterService.fetchCharacters { characters, error in
+            if let error = error {
+                // Handle error here
+                print("Error fetching characters: \(error)")
+                return
+            }
+            
+            if let characters = characters {
+                self.characters = characters
+                DispatchQueue.main.async {
+                    self.mainCollectionView.reloadData()
+                }
+            }
+        }
+    }
+
     
     // MARK: - sectionLayout
     
@@ -136,6 +156,10 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             ) as? MainCollectionViewCell else {
                 fatalError("Could not cast to MainCollectionViewCell")
             }
+            
+            let character = characters[indexPath.item]
+            cell.configure(with: character)
+            
             cell.characterButtonTappedHandler = {
                 let detailViewController = DetailViewController()
                 self.navigationController?.pushViewController(detailViewController, animated: true)
@@ -148,7 +172,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         let section = sections[section]
         switch section {
         case .main:
-            return 15
+            return characters.count
         }
     }
 }

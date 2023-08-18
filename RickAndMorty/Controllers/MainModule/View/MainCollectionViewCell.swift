@@ -86,4 +86,15 @@ final class MainCollectionViewCell: UICollectionViewCell {
         characterButtonTappedHandler?()
     }
     
+    func configure(with character: Character) {
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: character.image) {
+                DispatchQueue.main.async {
+                    self.characterImageView.image = UIImage(data: data)
+                }
+            }
+        }
+        characterButton.setTitle(character.name, for: .normal)
+    }
+    
 }
