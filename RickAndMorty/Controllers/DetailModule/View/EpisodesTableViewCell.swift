@@ -215,6 +215,7 @@ class EpisodesTableViewCell: UITableViewCell {
             make.top.equalToSuperview().offset(30)
             make.leading.equalToSuperview().offset(113)
             make.trailing.equalToSuperview().offset(-113)
+            make.height.equalTo(148)
         }
         characterDetailLabel.snp.makeConstraints { make in
             make.top.equalTo(characterDetailImageView.snp.bottom).offset(24)
