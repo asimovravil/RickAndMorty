@@ -10,6 +10,8 @@ import SnapKit
 
 final class DetailViewController: UIViewController {
     
+    var character: Character?
+    
     // MARK: - UI
     
     private lazy var tableView: UITableView = {
@@ -40,6 +42,7 @@ final class DetailViewController: UIViewController {
         [tableView].forEach {
             view.addSubview($0)
         }
+        
         view.backgroundColor = AppColor.blackBG.uiColor
     }
     
@@ -64,6 +67,28 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         ) as? EpisodesTableViewCell else {
             fatalError("Could not cast to LocalizationViewCell")
         }
+        
+        if let character = character {
+            DispatchQueue.global().async {
+                if let imageData = try? Data(contentsOf: character.image),
+                   let image = UIImage(data: imageData) {
+                    DispatchQueue.main.async {
+                        cell.characterDetailImageView.image = image
+                        cell.characterDetailLabel.text = character.name
+                        cell.characterDetailSubtitleLabel.text = character.status
+                        cell.descriptionSpeciesLabel.text = character.species
+                        if !character.type.isEmpty {
+                            cell.descriptionTypeLabel.text = character.type
+                        } else {
+                            cell.descriptionTypeLabel.text = "None"
+                        }
+                        cell.descriptionGenderLabel.text = character.gender
+                    }
+                }
+            }
+        }
+
+        
         cell.selectionStyle = .none
         cell.backgroundColor = AppColor.blackBG.uiColor
         return cell

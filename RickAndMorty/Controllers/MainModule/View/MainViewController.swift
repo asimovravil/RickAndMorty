@@ -162,6 +162,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             
             cell.characterButtonTappedHandler = {
                 let detailViewController = DetailViewController()
+                detailViewController.character = character
                 self.navigationController?.pushViewController(detailViewController, animated: true)
             }
             return cell

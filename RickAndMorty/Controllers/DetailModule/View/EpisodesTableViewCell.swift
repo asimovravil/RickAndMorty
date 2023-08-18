@@ -14,7 +14,7 @@ class EpisodesTableViewCell: UITableViewCell {
     
     // MARK: - UI
     
-    private lazy var characterDetailImageView: UIImageView = {
+    public lazy var characterDetailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = AppImage.rick.uiImage
         imageView.layer.cornerRadius = 10
@@ -23,7 +23,7 @@ class EpisodesTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var characterDetailLabel: UILabel = {
+    public lazy var characterDetailLabel: UILabel = {
         let label = UILabel()
         label.text = "Rick Sanchez"
         label.textColor = AppColor.whiteBG.uiColor
@@ -31,7 +31,7 @@ class EpisodesTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var characterDetailSubtitleLabel: UILabel = {
+    public lazy var characterDetailSubtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Alive"
         label.textColor = AppColor.primaryBG.uiColor
@@ -78,7 +78,7 @@ class EpisodesTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var descriptionSpeciesLabel: UILabel = {
+    public lazy var descriptionSpeciesLabel: UILabel = {
         let label = UILabel()
         label.text = "Human"
         label.textColor = AppColor.grayNormalBG.uiColor
@@ -86,7 +86,7 @@ class EpisodesTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var descriptionTypeLabel: UILabel = {
+    public lazy var descriptionTypeLabel: UILabel = {
         let label = UILabel()
         label.text = "None"
         label.textColor = AppColor.grayNormalBG.uiColor
@@ -94,7 +94,7 @@ class EpisodesTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var descriptionGenderLabel: UILabel = {
+    public lazy var descriptionGenderLabel: UILabel = {
         let label = UILabel()
         label.text = "Male"
         label.textColor = AppColor.grayNormalBG.uiColor
