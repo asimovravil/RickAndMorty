@@ -10,6 +10,7 @@ import SnapKit
 
 final class MainViewController: UIViewController {
 
+    private var locations: [Location] = []
     private var characters: [Character] = []
     let sections: [SectionType] = [.main]
     

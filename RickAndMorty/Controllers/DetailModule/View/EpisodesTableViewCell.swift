@@ -132,7 +132,7 @@ class EpisodesTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var originLabel: UILabel = {
+    public lazy var originLabel: UILabel = {
         let label = UILabel()
         label.text = "Earth"
         label.textColor = AppColor.whiteBG.uiColor
@@ -140,7 +140,7 @@ class EpisodesTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var originSubtitleLabel: UILabel = {
+    public lazy var originSubtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Planet"
         label.textColor = AppColor.primaryBG.uiColor
@@ -309,4 +309,12 @@ class EpisodesTableViewCell: UITableViewCell {
             make.trailing.equalTo(episodeCardView.snp.trailing).offset(-15)
         }
     }
+    
+    // MARK: - Actions
+    
+    public func configureLocation(with location: Location) {
+        originLabel.text = location.name
+        originSubtitleLabel.text = location.type
+    }
+    
 }

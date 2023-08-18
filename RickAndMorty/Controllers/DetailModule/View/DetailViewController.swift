@@ -10,6 +10,7 @@ import SnapKit
 
 final class DetailViewController: UIViewController {
     
+    var location: Location?
     var character: Character?
     
     // MARK: - UI
@@ -34,6 +35,7 @@ final class DetailViewController: UIViewController {
         
         setupViews()
         setupConstraints()
+        fetchLocationDetails()
     }
     
     // MARK: - setupViews
@@ -51,6 +53,22 @@ final class DetailViewController: UIViewController {
     private func setupConstraints() {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    private func fetchLocationDetails() {
+        LocationService.fetchLocations { locations, error in
+            if let error = error {
+                print("Error fetching locations: \(error)")
+                return
+            }
+            
+            if let locations = locations, let firstLocation = locations.first {
+                self.location = firstLocation
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
 }
@@ -88,6 +106,12 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
 
+        if let location = location {
+            DispatchQueue.main.async {
+                cell.originLabel.text = location.name
+                cell.originSubtitleLabel.text = location.type
+            }
+        }
         
         cell.selectionStyle = .none
         cell.backgroundColor = AppColor.blackBG.uiColor
