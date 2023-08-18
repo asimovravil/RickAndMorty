@@ -76,6 +76,8 @@ final class MainCollectionViewCell: UICollectionViewCell {
         }
         characterButton.snp.makeConstraints { make in
             make.top.equalTo(characterImageView.snp.bottom).offset(16)
+            make.leading.equalTo(characterView.snp.leading)
+            make.trailing.equalTo(characterView.snp.trailing)
             make.centerX.equalTo(characterView.snp.centerX)
         }
     }
