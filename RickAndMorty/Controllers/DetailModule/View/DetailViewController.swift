@@ -38,8 +38,6 @@ final class DetailViewController: UIViewController {
         
         setupViews()
         setupConstraints()
-        fetchLocationDetails()
-        fetchEpisodeDetails()
     }
     
     // MARK: - setupViews
@@ -59,38 +57,7 @@ final class DetailViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
-    
-    private func fetchLocationDetails() {
-        LocationService.fetchLocations { locations, error in
-            if let error = error {
-                print("Error fetching locations: \(error)")
-                return
-            }
-            
-            if let locations = locations, let firstLocation = locations.first {
-                self.location = firstLocation
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
-    }
-    
-    private func fetchEpisodeDetails() {
-        EpisodeService.fetchEpisodes { episodes, error in
-            if let error = error {
-                print("Error fetching episodes: \(error)")
-                return
-            }
-            
-            if let episodes = episodes, let firstEpisode = episodes.first {
-                self.episode = firstEpisode
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
-    }
+
 
     
 }
