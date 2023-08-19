@@ -10,6 +10,7 @@ import SnapKit
 
 final class MainViewController: UIViewController {
 
+    private var episodes: [Episode] = []
     private var locations: [Location] = []
     private var characters: [Character] = []
     let sections: [SectionType] = [.main]
@@ -89,8 +90,36 @@ final class MainViewController: UIViewController {
             if let characters = characters {
                 self.characters = characters
                 DispatchQueue.main.async {
+                    self.fetchLocationData()
+                    self.fetchEpisodeDetails()
                     self.mainCollectionView.reloadData()
                 }
+            }
+        }
+    }
+
+    private func fetchLocationData() {
+        LocationService.fetchLocations { locations, error in
+            if let error = error {
+                print("Error fetching locations: \(error)")
+                return
+            }
+            
+            if let locations = locations {
+                self.locations = locations
+            }
+        }
+    }
+
+    private func fetchEpisodeDetails() {
+        EpisodeService.fetchEpisodes { episodes, error in
+            if let error = error {
+                print("Error fetching episodes: \(error)")
+                return
+            }
+            
+            if let episodes = episodes {
+                self.episodes = episodes
             }
         }
     }
@@ -164,6 +193,8 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.characterButtonTappedHandler = {
                 let detailViewController = DetailViewController()
                 detailViewController.character = character
+                detailViewController.location = self.locations[indexPath.item]
+                detailViewController.episode = self.episodes[indexPath.item]
                 self.navigationController?.pushViewController(detailViewController, animated: true)
             }
             return cell
