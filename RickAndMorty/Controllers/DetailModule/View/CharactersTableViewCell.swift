@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class DetailTableViewCell: UITableViewCell {
+class CharactersTableViewCell: UITableViewCell {
 
-    static let reuseID = String(describing: DetailTableViewCell.self)
+    static let reuseID = String(describing: CharactersTableViewCell.self)
     
     // MARK: - UI
     
@@ -102,91 +102,6 @@ class DetailTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var originTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Origin"
-        label.textColor = AppColor.whiteBG.uiColor
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        return label
-    }()
-    
-    private lazy var originCardView: UIView = {
-        let view = UIView()
-        view.backgroundColor = AppColor.grayBG.uiColor
-        view.layer.cornerRadius = 16
-        return view
-    }()
-    
-    private lazy var planetCardView: UIView = {
-        let view = UIView()
-        view.backgroundColor = AppColor.blackElementBG.uiColor
-        view.layer.cornerRadius = 10
-        return view
-    }()
-    
-    private lazy var planetImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = AppImage.planet.uiImage
-        imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    
-    public lazy var originLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Earth"
-        label.textColor = AppColor.whiteBG.uiColor
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        return label
-    }()
-    
-    public lazy var originSubtitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Planet"
-        label.textColor = AppColor.primaryBG.uiColor
-        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        return label
-    }()
-    
-    private lazy var episodesTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Episodes"
-        label.textColor = AppColor.whiteBG.uiColor
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        return label
-    }()
-    
-    private lazy var episodeCardView: UIView = {
-        let view = UIView()
-        view.backgroundColor = AppColor.grayBG.uiColor
-        view.layer.cornerRadius = 10
-        return view
-    }()
-    
-    public lazy var episodeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Pilot"
-        label.textColor = AppColor.whiteBG.uiColor
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        return label
-    }()
-    
-    public lazy var episodeSubtitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Episode: 1, Season: 1"
-        label.textColor = AppColor.primaryBG.uiColor
-        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        return label
-    }()
-    
-    public lazy var dataSubtitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "December 2, 2013"
-        label.textColor = AppColor.grayTextBG.uiColor
-        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        return label
-    }()
-    
     // MARK: - Lifecycle
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -203,7 +118,7 @@ class DetailTableViewCell: UITableViewCell {
     // MARK: - setupViews
 
     private func setupViews() {
-        [characterDetailImageView, characterDetailLabel, characterDetailSubtitleLabel, infoTitleLabel, infoCardView, infoSpeciesLabel, infoTypeLabel, infoGenderLabel, descriptionSpeciesLabel, descriptionTypeLabel, descriptionGenderLabel, originTitleLabel, originCardView, planetCardView, planetImageView, originLabel, originSubtitleLabel, episodesTitleLabel, episodeCardView, episodeLabel, episodeSubtitleLabel, dataSubtitleLabel].forEach {
+        [characterDetailImageView, characterDetailLabel, characterDetailSubtitleLabel, infoTitleLabel, infoCardView, infoSpeciesLabel, infoTypeLabel, infoGenderLabel, descriptionSpeciesLabel, descriptionTypeLabel, descriptionGenderLabel].forEach {
             contentView.addSubview($0)
         }
     }
@@ -258,56 +173,6 @@ class DetailTableViewCell: UITableViewCell {
             make.top.equalTo(infoCardView.snp.top).offset(88)
             make.trailing.equalTo(infoCardView.snp.trailing).offset(-16)
         }
-        originTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(infoCardView.snp.bottom).offset(24)
-            make.leading.equalToSuperview().offset(24)
-        }
-        originCardView.snp.makeConstraints { make in
-            make.top.equalTo(originTitleLabel.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(24)
-            make.height.equalTo(80)
-        }
-        planetCardView.snp.makeConstraints { make in
-            make.width.height.equalTo(64)
-            make.top.equalTo(originCardView.snp.top).offset(8)
-            make.leading.equalTo(originCardView.snp.leading).offset(8)
-            make.bottom.equalTo(originCardView.snp.bottom).offset(-8)
-        }
-        planetImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
-            make.centerX.equalTo(planetCardView.snp.centerX)
-            make.centerY.equalTo(planetCardView.snp.centerY)
-        }
-
-        originLabel.snp.makeConstraints { make in
-            make.top.equalTo(originCardView.snp.top).offset(16)
-            make.leading.equalTo(planetCardView.snp.trailing).offset(16)
-        }
-        originSubtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(originCardView.snp.top).offset(46)
-            make.leading.equalTo(planetCardView.snp.trailing).offset(16)
-        }
-        episodesTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(originCardView.snp.bottom).offset(24)
-            make.leading.equalToSuperview().offset(24)
-        }
-        episodeCardView.snp.makeConstraints { make in
-            make.top.equalTo(episodesTitleLabel.snp.bottom).offset(24)
-            make.leading.trailing.equalToSuperview().inset(24)
-            make.height.equalTo(86)
-        }
-        episodeLabel.snp.makeConstraints { make in
-            make.top.equalTo(episodeCardView.snp.top).offset(16)
-            make.leading.equalTo(episodeCardView.snp.leading).offset(15)
-        }
-        episodeSubtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(episodeCardView.snp.top).offset(54)
-            make.leading.equalTo(episodeCardView.snp.leading).offset(15)
-        }
-        dataSubtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(episodeCardView.snp.top).offset(54)
-            make.trailing.equalTo(episodeCardView.snp.trailing).offset(-15)
-        }
     }
     
     // MARK: - Actions
@@ -331,16 +196,4 @@ class DetailTableViewCell: UITableViewCell {
             }
         }
     }
-
-    public func configureLocation(with location: Location) {
-        originLabel.text = location.name
-        originSubtitleLabel.text = location.type
-    }
-    
-    public func configureEpisode(with episode: Episode) {
-        episodeLabel.text = episode.name
-        episodeSubtitleLabel.text = "Episode: \(episode.episode)"
-        dataSubtitleLabel.text = episode.airDate
-    }
-    
 }
