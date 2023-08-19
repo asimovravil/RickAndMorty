@@ -340,7 +340,7 @@ class DetailTableViewCell: UITableViewCell {
     public func configureEpisode(with episode: Episode) {
         episodeLabel.text = episode.name
         episodeSubtitleLabel.text = "Episode: \(episode.episode)"
-        dataSubtitleLabel.text = episode.air_date
+        dataSubtitleLabel.text = episode.airDate
     }
     
 }
