@@ -180,7 +180,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
             return 105.0
         }
 
-        return UITableView.automaticDimension 
+        return UITableView.automaticDimension
     }
 }
 

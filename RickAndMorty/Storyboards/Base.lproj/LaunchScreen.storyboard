@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,29 +15,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashscreen" translatesAutoresizingMaskIntoConstraints="NO" id="9y5-UV-fmx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rickandmorty" translatesAutoresizingMaskIntoConstraints="NO" id="pXy-f9-XAh">
+                                <rect key="frame" x="124" y="171" width="167" height="40"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="logolaunchscreen" translatesAutoresizingMaskIntoConstraints="NO" id="7Yy-hq-jZP">
+                                <rect key="frame" x="122" y="219" width="171" height="316"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="framelaunchscreen" translatesAutoresizingMaskIntoConstraints="NO" id="xDH-Yt-aWW">
+                                <rect key="frame" x="0.0" y="124" width="414" height="693"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.015686274509803921" green="0.047058823529411764" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="9y5-UV-fmx" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7if-NA-mQd"/>
-                            <constraint firstAttribute="bottom" secondItem="9y5-UV-fmx" secondAttribute="bottom" id="OLg-Sj-rB5"/>
-                            <constraint firstItem="9y5-UV-fmx" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="cCx-wX-NKi"/>
-                            <constraint firstItem="9y5-UV-fmx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ewe-Xa-ZMX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pXy-f9-XAh" secondAttribute="trailing" constant="123" id="6HI-d1-Oie"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7Yy-hq-jZP" secondAttribute="bottom" constant="327" id="83p-xQ-S4a"/>
+                            <constraint firstItem="xDH-Yt-aWW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FS6-st-MCd"/>
+                            <constraint firstItem="7Yy-hq-jZP" firstAttribute="top" secondItem="pXy-f9-XAh" secondAttribute="bottom" constant="8" symbolic="YES" id="MT7-sN-yHU"/>
+                            <constraint firstItem="pXy-f9-XAh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="124" id="O9R-Sa-Jca"/>
+                            <constraint firstItem="xDH-Yt-aWW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="QFX-eN-IZs"/>
+                            <constraint firstItem="7Yy-hq-jZP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="122" id="VBM-b8-ifC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Yy-hq-jZP" secondAttribute="trailing" constant="121" id="VzH-pB-BJt"/>
+                            <constraint firstItem="pXy-f9-XAh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="123" id="cJw-Kf-Uws"/>
+                            <constraint firstItem="xDH-Yt-aWW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="76" id="rQc-ho-teA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xDH-Yt-aWW" secondAttribute="bottom" constant="45" id="wn9-4e-aIX"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
+            <point key="canvasLocation" x="52.173913043478265" y="374.33035714285711"/>
         </scene>
     </scenes>
     <resources>
-        <image name="splashscreen" width="375" height="812"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="framelaunchscreen" width="334" height="650"/>
+        <image name="logolaunchscreen" width="140" height="228"/>
+        <image name="rickandmorty" width="140" height="40"/>
     </resources>
 </document>
