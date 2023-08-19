@@ -70,7 +70,7 @@ final class EpisodesTableViewCell: UITableViewCell {
 
     private func setupConstraints() {
         episodeCardView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(5)
+            make.top.equalToSuperview().offset(10)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(86)
         }
