@@ -10,6 +10,9 @@ import SnapKit
 
 final class DetailViewController: UIViewController {
     
+    private var episodes: [Episode] = []
+    private var locations: [Location] = []
+    private var characters: [Character] = []
     var episode: Episode?
     var location: Location?
     var character: Character?

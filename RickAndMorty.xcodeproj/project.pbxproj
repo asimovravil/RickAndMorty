@@ -118,17 +118,17 @@
 			children = (
 				F16A9D472A8E033B0083D471 /* Model */,
 				F16A9D462A8E03370083D471 /* View */,
-				F16A9D452A8E03300083D471 /* ViewModel */,
+				F16A9D452A8E03300083D471 /* Service */,
 			);
 			path = MainModule;
 			sourceTree = "<group>";
 		};
-		F16A9D452A8E03300083D471 /* ViewModel */ = {
+		F16A9D452A8E03300083D471 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				F16A9D682A8F7EF10083D471 /* CharacterService.swift */,
 			);
-			path = ViewModel;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		F16A9D462A8E03370083D471 /* View */ = {
@@ -154,18 +154,18 @@
 			children = (
 				F16A9D4B2A8E03620083D471 /* Model */,
 				F16A9D4A2A8E035E0083D471 /* View */,
-				F16A9D492A8E03590083D471 /* ViewModel */,
+				F16A9D492A8E03590083D471 /* Service */,
 			);
 			path = DetailModule;
 			sourceTree = "<group>";
 		};
-		F16A9D492A8E03590083D471 /* ViewModel */ = {
+		F16A9D492A8E03590083D471 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				F16A9D6F2A8FC2130083D471 /* LocationService.swift */,
 				F16A9D732A905B2E0083D471 /* EpisodeService.swift */,
 			);
-			path = ViewModel;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		F16A9D4A2A8E035E0083D471 /* View */ = {
