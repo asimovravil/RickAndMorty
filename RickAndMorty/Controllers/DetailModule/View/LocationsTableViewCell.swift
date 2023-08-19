@@ -122,7 +122,7 @@ final class LocationsTableViewCell: UITableViewCell {
             make.leading.equalTo(planetCardView.snp.trailing).offset(16)
         }
         episodesTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(originCardView.snp.bottom).offset(20)
+            make.top.equalTo(originCardView.snp.bottom).offset(25)
             make.leading.equalToSuperview().offset(24)
         }
     }

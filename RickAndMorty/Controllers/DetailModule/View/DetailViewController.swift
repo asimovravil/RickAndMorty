@@ -172,17 +172,15 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         fatalError("Unexpected section")
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let screenHeight = UIScreen.main.bounds.height
-        
         if indexPath.section == 0 {
-            return screenHeight * 0.5  
+            return 450.0  
         } else if indexPath.section == 1 {
-            return screenHeight * 0.2
+            return 195.0
         } else if indexPath.section == 2 {
-            return screenHeight * 0.115
+            return 105.0
         }
-        
-        return 0  
+
+        return UITableView.automaticDimension 
     }
 }
 
