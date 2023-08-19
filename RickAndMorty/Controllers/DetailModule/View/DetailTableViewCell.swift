@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class EpisodesTableViewCell: UITableViewCell {
+class DetailTableViewCell: UITableViewCell {
 
-    static let reuseID = String(describing: EpisodesTableViewCell.self)
+    static let reuseID = String(describing: DetailTableViewCell.self)
     
     // MARK: - UI
     
@@ -163,7 +163,7 @@ class EpisodesTableViewCell: UITableViewCell {
         return view
     }()
     
-    private lazy var episodeLabel: UILabel = {
+    public lazy var episodeLabel: UILabel = {
         let label = UILabel()
         label.text = "Pilot"
         label.textColor = AppColor.whiteBG.uiColor
@@ -171,7 +171,7 @@ class EpisodesTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var episodeSubtitleLabel: UILabel = {
+    public lazy var episodeSubtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Episode: 1, Season: 1"
         label.textColor = AppColor.primaryBG.uiColor
@@ -179,7 +179,7 @@ class EpisodesTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var dataSubtitleLabel: UILabel = {
+    public lazy var dataSubtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "December 2, 2013"
         label.textColor = AppColor.grayTextBG.uiColor
@@ -312,9 +312,35 @@ class EpisodesTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     
+    public func configureCharacter(with character: Character) {
+        DispatchQueue.global().async {
+            if let imageData = try? Data(contentsOf: character.image),
+               let image = UIImage(data: imageData) {
+                DispatchQueue.main.async {
+                    self.characterDetailImageView.image = image
+                    self.characterDetailLabel.text = character.name
+                    self.characterDetailSubtitleLabel.text = character.status
+                    self.descriptionSpeciesLabel.text = character.species
+                    if !character.type.isEmpty {
+                        self.descriptionTypeLabel.text = character.type
+                    } else {
+                        self.descriptionTypeLabel.text = "None"
+                    }
+                    self.descriptionGenderLabel.text = character.gender
+                }
+            }
+        }
+    }
+
     public func configureLocation(with location: Location) {
         originLabel.text = location.name
         originSubtitleLabel.text = location.type
+    }
+    
+    public func configureEpisode(with episode: Episode) {
+        episodeLabel.text = episode.name
+        episodeSubtitleLabel.text = episode.episode
+        dataSubtitleLabel.text = episode.air_date
     }
     
 }

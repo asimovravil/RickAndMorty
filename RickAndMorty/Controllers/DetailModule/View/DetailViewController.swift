@@ -10,6 +10,7 @@ import SnapKit
 
 final class DetailViewController: UIViewController {
     
+    var episode: Episode?
     var location: Location?
     var character: Character?
     
@@ -19,7 +20,7 @@ final class DetailViewController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .plain)
         let screenHeight = UIScreen.main.bounds.height
         tableView.rowHeight = screenHeight
-        tableView.register(EpisodesTableViewCell.self, forCellReuseIdentifier: EpisodesTableViewCell.reuseID)
+        tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.reuseID)
         tableView.backgroundColor = AppColor.blackBG.uiColor
         tableView.dataSource = self
         tableView.delegate = self
@@ -36,6 +37,7 @@ final class DetailViewController: UIViewController {
         setupViews()
         setupConstraints()
         fetchLocationDetails()
+        fetchEpisodeDetails()
     }
     
     // MARK: - setupViews
@@ -71,6 +73,24 @@ final class DetailViewController: UIViewController {
             }
         }
     }
+    
+    private func fetchEpisodeDetails() {
+        EpisodeService.fetchEpisodes { episodes, error in
+            if let error = error {
+                print("Error fetching episodes: \(error)")
+                return
+            }
+            
+            if let episodes = episodes, let firstEpisode = episodes.first {
+                self.episode = firstEpisode
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+
+    
 }
 
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
@@ -80,36 +100,25 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: EpisodesTableViewCell.reuseID,
+            withIdentifier: DetailTableViewCell.reuseID,
             for: indexPath
-        ) as? EpisodesTableViewCell else {
+        ) as? DetailTableViewCell else {
             fatalError("Could not cast to LocalizationViewCell")
         }
         
         if let character = character {
-            DispatchQueue.global().async {
-                if let imageData = try? Data(contentsOf: character.image),
-                   let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        cell.characterDetailImageView.image = image
-                        cell.characterDetailLabel.text = character.name
-                        cell.characterDetailSubtitleLabel.text = character.status
-                        cell.descriptionSpeciesLabel.text = character.species
-                        if !character.type.isEmpty {
-                            cell.descriptionTypeLabel.text = character.type
-                        } else {
-                            cell.descriptionTypeLabel.text = "None"
-                        }
-                        cell.descriptionGenderLabel.text = character.gender
-                    }
-                }
-            }
+            cell.configureCharacter(with: character)
         }
 
         if let location = location {
             DispatchQueue.main.async {
-                cell.originLabel.text = location.name
-                cell.originSubtitleLabel.text = location.type
+                cell.configureLocation(with: location)
+            }
+        }
+        
+        if let episode = episode {
+            DispatchQueue.main.async {
+                cell.configureEpisode(with: episode)
             }
         }
         
