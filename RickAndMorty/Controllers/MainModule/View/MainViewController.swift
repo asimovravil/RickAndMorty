@@ -111,24 +111,23 @@ final class MainViewController: UIViewController {
     }
     
     // MARK: - sectionLayout
-    
     private func mainSectionLayout() -> NSCollectionLayoutSection {
         // Item
         let item = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(156),
+                widthDimension: .fractionalWidth(0.5),
                 heightDimension: .absolute(202)
             )
         )
         item.contentInsets.trailing = 20
         // Group
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(180)
+        )
         let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(180)
-            ),
-            subitem: item,
-            count: 2
+            layoutSize: groupSize,
+            subitems: [item, item]
         )
         // Section
         let section = NSCollectionLayoutSection(group: group)
@@ -137,11 +136,12 @@ final class MainViewController: UIViewController {
             top: 0,
             leading: 16,
             bottom: 10,
-            trailing: -16
+            trailing: -16 
         )
         section.boundarySupplementaryItems = [supplementaryHeaderItem()]
         return section
     }
+
     
     private func supplementaryHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
         return NSCollectionLayoutBoundarySupplementaryItem(
