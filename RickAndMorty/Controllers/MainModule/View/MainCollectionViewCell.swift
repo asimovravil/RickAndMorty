@@ -24,7 +24,6 @@ final class MainCollectionViewCell: UICollectionViewCell {
     
     private lazy var characterImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = AppImage.rick.uiImage
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill

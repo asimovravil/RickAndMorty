@@ -10,10 +10,7 @@ import SnapKit
 
 final class DetailViewController: UIViewController {
     
-    private var episodes: [Episode] = []
-    private var locations: [Location] = []
-    private var characters: [Character] = []
-    var episode: Episode?
+    var episodes: [Episode] = []
     var location: Location?
     var character: Character?
     
@@ -34,13 +31,12 @@ final class DetailViewController: UIViewController {
         return tableView
     }()
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
         setupConstraints()
+        fetchEpisodeDetails()
     }
     
     // MARK: - setupViews
@@ -61,8 +57,21 @@ final class DetailViewController: UIViewController {
         }
     }
 
-
-    
+    private func fetchEpisodeDetails() {
+        EpisodeService.fetchEpisodes { episodes, error in
+            if let error = error {
+                print("Error fetching episodes: \(error)")
+                return
+            }
+            
+            if let episodes = episodes {
+                self.episodes = episodes
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
 }
 
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
@@ -76,9 +85,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         } else if section == 1 {
             return 1
         } else if section == 2 {
-            return 10  
+            return episodes.count
         }
-        
         return 0
     }
 
@@ -90,14 +98,11 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
             ) as? CharactersTableViewCell else {
                 fatalError("Could not cast to DetailTableViewCell")
             }
-            
             if let character = character {
                 detailCell.configureCharacter(with: character)
             }
-            
             detailCell.selectionStyle = .none
             detailCell.backgroundColor = AppColor.blackBG.uiColor
-            
             return detailCell
         } else if indexPath.section == 1 {
             guard let locationsCell = tableView.dequeueReusableCell(
@@ -106,20 +111,16 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
             ) as? LocationsTableViewCell else {
                 fatalError("Could not cast to LocationsTableViewCell")
             }
-            
             if let location = location {
                 locationsCell.configureLocation(with: location)
             }
-            
             if indexPath.row == 0 {
                 locationsCell.episodesTitleLabel.isHidden = false
             } else {
                 locationsCell.episodesTitleLabel.isHidden = true
             }
-            
             locationsCell.selectionStyle = .none
             locationsCell.backgroundColor = AppColor.blackBG.uiColor
-            
             return locationsCell
         } else if indexPath.section == 2 {
             guard let episodesCell = tableView.dequeueReusableCell(
@@ -128,19 +129,14 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
             ) as? EpisodesTableViewCell else {
                 fatalError("Could not cast to EpisodesTableViewCell")
             }
-            
-            if let episode = episode {
-                episodesCell.configureEpisode(with: episode)
-            }
-            
+            episodesCell.configureEpisode(with: episodes[indexPath.row])
             episodesCell.selectionStyle = .none
             episodesCell.backgroundColor = AppColor.blackBG.uiColor
-            
             return episodesCell
         }
-        
         fatalError("Unexpected section")
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 450.0  
@@ -149,7 +145,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.section == 2 {
             return 105.0
         }
-
         return UITableView.automaticDimension
     }
 }

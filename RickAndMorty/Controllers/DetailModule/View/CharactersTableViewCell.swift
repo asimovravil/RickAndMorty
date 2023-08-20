@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class CharactersTableViewCell: UITableViewCell {
+final class CharactersTableViewCell: UITableViewCell {
 
     static let reuseID = String(describing: CharactersTableViewCell.self)
     
@@ -16,7 +16,6 @@ class CharactersTableViewCell: UITableViewCell {
     
     public lazy var characterDetailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = AppImage.rick.uiImage
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill

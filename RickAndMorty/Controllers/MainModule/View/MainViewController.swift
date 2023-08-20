@@ -91,7 +91,6 @@ final class MainViewController: UIViewController {
                 self.characters = characters
                 DispatchQueue.main.async {
                     self.fetchLocationData()
-                    self.fetchEpisodeDetails()
                     self.mainCollectionView.reloadData()
                 }
             }
@@ -110,20 +109,6 @@ final class MainViewController: UIViewController {
             }
         }
     }
-
-    private func fetchEpisodeDetails() {
-        EpisodeService.fetchEpisodes { episodes, error in
-            if let error = error {
-                print("Error fetching episodes: \(error)")
-                return
-            }
-            
-            if let episodes = episodes {
-                self.episodes = episodes
-            }
-        }
-    }
-
     
     // MARK: - sectionLayout
     
@@ -194,7 +179,6 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
                 let detailViewController = DetailViewController()
                 detailViewController.character = character
                 detailViewController.location = self.locations[indexPath.item]
-                detailViewController.episode = self.episodes[indexPath.item]
                 self.navigationController?.pushViewController(detailViewController, animated: true)
             }
             return cell
