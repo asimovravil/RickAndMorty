@@ -18,7 +18,6 @@ final class CharactersTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
